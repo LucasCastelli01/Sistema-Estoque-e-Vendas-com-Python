@@ -48,20 +48,39 @@ def mostrar_menu():
 
 
 def executar_opcao(opcao, service):
-    if opcao == 1:
-        pass
+    if opcao == 1:  
+        nome = input("Digite o nome do cliente: ")
+        cliente = service.cadastrar_cliente(nome)
+        print(f"Cliente cadastrado com sucesso! Código: {cliente.codigo}, Nome: {cliente.nome}")
+        
 
     elif opcao == 2:
-        pass
+        clientes = service.listar_clientes()
+        imprimir_registros(clientes, "Nenhum cliente cadastrado.")
 
     elif opcao == 3:
-        pass
+        procurando = ler_inteiro("Digite o código do cliente que deseja buscar: ")
+        cliente = service.buscar_cliente(procurando)
+        if cliente:
+            print(f"Cliente encontrado! Código: {cliente.codigo}, Nome: {cliente.nome}")
+        else:
+            print("Cliente não encontrado.")
 
     elif opcao == 4:
-        pass
+        codigo_removido = ler_inteiro("Digite o código do cliente que deseja remover: ")
+        cliente_removido = service.remover_cliente(codigo_removido)
+        if cliente_removido:
+            print(f"Cliente removido com sucesso! Código: {cliente_removido.codigo}, Nome: {cliente_removido.nome}")
+        else:
+            print("Cliente não encontrado ou lista de clientes vazia.")
 
     elif opcao == 5:
-        pass
+        nome = input("Digite o nome do produto: ")
+        preco = ler_float("Digite o preço do produto: ")
+        quantidade = ler_inteiro("Digite a quantidade em estoque do produto: ")
+        produto = service.cadastrar_produto(nome, preco, quantidade)
+        print(f"Produto cadastrado com sucesso! Código: {produto.codigo}, Nome: {produto.nome}, Preço: {produto.preco}, Quantidade: {produto.quantidade}")
+        
 
     elif opcao == 6:
         pass

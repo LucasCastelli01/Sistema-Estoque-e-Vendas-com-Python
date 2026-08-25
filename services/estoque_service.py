@@ -1,5 +1,7 @@
 import os
 
+from models.cliente import Cliente
+from models.produto import Produto
 from estruturas.fila import Fila
 from estruturas.lde import LDE
 from estruturas.lse import LSE
@@ -48,19 +50,35 @@ class EstoqueService:
         return maior_codigo + 1
 
     def cadastrar_cliente(self, nome):
-        pass
+        codigo = self.gerar_proximo_codigo_cliente()
+        cliente = Cliente(codigo, nome)
+        self.clientes.inserir_fim(cliente)
+        self.salvar_clientes()
+        return cliente
 
     def listar_clientes(self):
-        pass
+        if self.clientes.is_empty():
+            return []
+        return self.clientes.listar()
 
     def buscar_cliente(self, codigo):
-        pass
+        if self.clientes.is_empty():
+            return None
+        return self.clientes.buscar(codigo)
 
     def remover_cliente(self, codigo):
-        pass
+        if self.clientes.is_empty():
+            return None
+        cliente_removido = self.clientes.remover(codigo)
+        self.salvar_clientes()
+        return cliente_removido
 
     def cadastrar_produto(self, nome, preco, quantidade):
-        pass
+        codigo = self.gerar_proximo_codigo_produto()
+        produto = Produto(codigo, nome, preco, quantidade)
+        self.produtos.inserir_fim(produto)
+        self.salvar_produtos()
+        return produto
 
     def listar_produtos(self):
         pass
