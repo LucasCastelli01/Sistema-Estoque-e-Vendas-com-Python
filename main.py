@@ -105,7 +105,19 @@ def executar_opcao(opcao, service):
             print("Produto não encontrado.")
 
     elif opcao == 8:
-            pass
+        quer_atualizar = input("Você deseja atualizar algum produto? (s/n): ")
+        if quer_atualizar.lower() == 's':
+            codigo_atualizar = ler_inteiro("Digite o código do produto que deseja atualizar: ")
+            if codigo_atualizar <= 0:
+                raise ValueError("O código do produto deve ser maior que zero.")
+            nova_quantidade = ler_inteiro("Digite a nova quantidade em estoque: ")
+            produto_atualizado = service.atualizar_estoque(codigo_atualizar, nova_quantidade)
+            if produto_atualizado:
+                print(f"Produto atualizado com sucesso! Código: {produto_atualizado.codigo}, Nome: {produto_atualizado.nome}, Preço: {produto_atualizado.preco}, Quantidade: {produto_atualizado.quantidade}")
+            else:
+                print("Produto não encontrado ou lista de produtos vazia.")
+        else:
+            print("Atualização de estoque cancelada.")
 
     elif opcao == 9:
         pass
@@ -158,6 +170,9 @@ def main():
 
         try:
             opcao = ler_inteiro("Escolha uma opcao: ")
+
+            if opcao < 0 or opcao > 21:
+                raise ValueError("Opcao invalida. Tente novamente.")
 
             if opcao == 0:
                 print("Sistema encerrado.")

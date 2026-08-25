@@ -104,7 +104,14 @@ class EstoqueService:
         pass
 
     def atualizar_estoque(self, codigo, nova_quantidade):
-        pass
+        if self.produtos.is_empty():
+            return None
+        produto = self.produtos.buscar(codigo)
+        if produto:
+            produto.atualizar_estoque(nova_quantidade)
+            self.salvar_produtos()
+            return produto
+        return None
 
     def remover_produto(self, codigo):
         pass
