@@ -20,31 +20,42 @@ def imprimir_registros(registros, mensagem_vazia):
         print(registro)
 
 def mostrar_menu():
-    print("\n==============================")
-    print("SISTEMA DE ESTOQUE E VENDAS")
-    print("==============================")
-    print("1 - Cadastrar cliente")
-    print("2 - Listar clientes")
-    print("3 - Buscar cliente")
-    print("4 - Remover cliente")
-    print("5 - Cadastrar produto")
-    print("6 - Listar produtos")
-    print("7 - Buscar produto")
-    print("8 - Atualizar estoque")
-    print("9 - Remover produto")
-    print("10 - Listar produtos em ordem inversa")
-    print("11 - Listar produtos ordenados por ID")
-    print("12 - Buscar produto por ID usando Busca Binaria")
-    print("13 - Realizar venda simples de exemplo")
-    print("14 - Visualizar fila de vendas")
-    print("15 - Visualizar primeira venda da fila")
-    print("16 - Exibir valor total do estoque")
-    print("17 - Exibir valor total das vendas")
-    print("18 - Exibir clientes e valores totais gastos")
-    print("19 - Exibir cliente que mais gastou")
-    print("20 - Exibir produto mais vendido")
-    print("21 - Desfazer ultima operacao")
-    print("0 - Sair")
+    print("\n╔══════════════════════════════════════════════╗")
+    print("║          SISTEMA DE ESTOQUE E VENDAS        ║")
+    print("╠══════════════════════════════════════════════╣")
+    print("║ CLIENTES                                     ║")
+    print("║  1 - Cadastrar cliente                       ║")
+    print("║  2 - Listar clientes                         ║")
+    print("║  3 - Buscar cliente                          ║")
+    print("║  4 - Remover cliente                         ║")
+    print("╠══════════════════════════════════════════════╣")
+    print("║ PRODUTOS                                     ║")
+    print("║  5 - Cadastrar produto                       ║")
+    print("║  6 - Listar produtos                         ║")
+    print("║  7 - Buscar produto                          ║")
+    print("║  8 - Atualizar estoque                       ║")
+    print("║  9 - Remover produto                         ║")
+    print("║ 10 - Listar produtos em ordem inversa       ║")
+    print("║ 11 - Listar produtos ordenados por ID       ║")
+    print("║ 12 - Buscar produto por ID usando Busca     ║")
+    print("║      Binária                                 ║")
+    print("╠══════════════════════════════════════════════╣")
+    print("║ VENDAS                                       ║")
+    print("║ 13 - Realizar venda simples de exemplo      ║")
+    print("║ 14 - Visualizar fila de vendas               ║")
+    print("║ 15 - Visualizar primeira venda da fila       ║")
+    print("╠══════════════════════════════════════════════╣")
+    print("║ RELATÓRIOS                                   ║")
+    print("║ 16 - Exibir valor total do estoque           ║")
+    print("║ 17 - Exibir valor total das vendas           ║")
+    print("║ 18 - Exibir clientes e valores totais gastos║")
+    print("║ 19 - Exibir cliente que mais gastou          ║")
+    print("║ 20 - Exibir produto mais vendido             ║")
+    print("╠══════════════════════════════════════════════╣")
+    print("║ SISTEMA                                      ║")
+    print("║ 21 - Desfazer ultima operacao                ║")
+    print("║  0 - Sair                                    ║")
+    print("╚══════════════════════════════════════════════╝")
 
 
 def executar_opcao(opcao, service):
@@ -81,15 +92,20 @@ def executar_opcao(opcao, service):
         produto = service.cadastrar_produto(nome, preco, quantidade)
         print(f"Produto cadastrado com sucesso! Código: {produto.codigo}, Nome: {produto.nome}, Preço: {produto.preco}, Quantidade: {produto.quantidade}")
         
-
     elif opcao == 6:
-        pass
+        produtos = service.listar_produtos()
+        imprimir_registros(produtos, "Nenhum produto cadastrado.")
 
     elif opcao == 7:
-        pass
+        procurando = ler_inteiro("Digite o código do Produto que deseja buscar: ")
+        produto = service.buscar_produto(procurando)
+        if produto:
+            print(f"Produto encontrado! Código: {produto.codigo}, Nome: {produto.nome}, Preço: {produto.preco}, Quantidade: {produto.quantidade}")
+        else:
+            print("Produto não encontrado.")
 
     elif opcao == 8:
-        pass
+            pass
 
     elif opcao == 9:
         pass
@@ -98,7 +114,8 @@ def executar_opcao(opcao, service):
         pass
 
     elif opcao == 11:
-        pass
+        lista_por_id = service.listar_produtos_ordenados_por_id()
+        imprimir_registros(lista_por_id, "Nenhum produto cadastrado.")
 
     elif opcao == 12:
         pass

@@ -1,5 +1,6 @@
 import os
 
+from algoritmos.ordenacao import ordenar_produtos_por_id
 from models.cliente import Cliente
 from models.produto import Produto
 from estruturas.fila import Fila
@@ -81,16 +82,23 @@ class EstoqueService:
         return produto
 
     def listar_produtos(self):
-        pass
+        if self.produtos.is_empty():
+                    return []
+        return self.produtos.listar()
 
     def listar_produtos_inverso(self):
         pass
 
     def listar_produtos_ordenados_por_id(self):
-        pass
+        if self.produtos.is_empty():
+            return []
+        produtos = ordenar_produtos_por_id(self.produtos.listar())
+        return produtos
 
     def buscar_produto(self, codigo):
-        pass
+        if self.produtos.is_empty():
+                    return None
+        return self.produtos.buscar(codigo)
 
     def buscar_produto_binario(self, codigo):
         pass
