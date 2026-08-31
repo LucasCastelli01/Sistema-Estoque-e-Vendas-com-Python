@@ -1,6 +1,7 @@
 import os
 
 from algoritmos.ordenacao import ordenar_produtos_por_id
+from algoritmos.busca_binaria import buscar_produto_por_id
 from models.cliente import Cliente
 from models.produto import Produto
 from estruturas.fila import Fila
@@ -87,7 +88,9 @@ class EstoqueService:
         return self.produtos.listar()
 
     def listar_produtos_inverso(self):
-        pass
+        produtos =  ordenar_produtos_por_id(self.produtos.listar())
+        produtos_inverso = list(reversed(produtos))
+        return produtos_inverso
 
     def listar_produtos_ordenados_por_id(self):
         if self.produtos.is_empty():
@@ -101,7 +104,10 @@ class EstoqueService:
         return self.produtos.buscar(codigo)
 
     def buscar_produto_binario(self, codigo):
-        pass
+        if self.produtos.is_empty():
+                    return None
+        produtos = buscar_produto_por_id (self.produtos.listar(), codigo)
+        return  produtos
 
     def atualizar_estoque(self, codigo, nova_quantidade):
         if self.produtos.is_empty():
@@ -114,7 +120,11 @@ class EstoqueService:
         return None
 
     def remover_produto(self, codigo):
-        pass
+        if self.produtos.is_empty():
+            return None
+        produto_removido = self.produtos.remover(codigo)
+        self.salvar_produtos()
+        return produto_removido
 
     def realizar_venda_exemplo(self, codigo_cliente, codigo_produto, quantidade):
         pass

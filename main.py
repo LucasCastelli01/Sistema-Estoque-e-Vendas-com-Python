@@ -120,17 +120,29 @@ def executar_opcao(opcao, service):
             print("Atualização de estoque cancelada.")
 
     elif opcao == 9:
-        pass
+        codigo_removido = ler_inteiro("Digite o código do produto que deseja remover:")
+        produto_removido = service.remover_produto(codigo_removido)
+        if produto_removido:
+            print(f"Produto removido com sucesso! Código: {produto_removido.codigo}, Nome: {produto_removido.nome}, Preço: {produto_removido.preco}, Quantidade: {produto_removido.quantidade}")
+        else:
+            print("Produto não encontrado ou lista de produtos vazia.")
 
     elif opcao == 10:
-        pass
+        produtos_inverso = service.listar_produtos_inverso()
+        imprimir_registros(produtos_inverso, "Nenhum produto cadastrado.")
 
     elif opcao == 11:
         lista_por_id = service.listar_produtos_ordenados_por_id()
         imprimir_registros(lista_por_id, "Nenhum produto cadastrado.")
 
     elif opcao == 12:
-        pass
+        produto_buscar = ler_inteiro("Digite o código do produto que você deseja buscar: ")
+        produto_encontrado = service.buscar_produto_binario(produto_buscar)
+        if produto_encontrado:
+            print(f"Produto encontrado com sucesso! Código: {produto_encontrado.codigo}, Nome: {produto_encontrado.nome}, Preço: {produto_encontrado.preco}, Quantidade: {produto_encontrado.quantidade}")
+        else:
+            print("Produto não encontrado ou lista de produtos vazia.")
+
 
     elif opcao == 13:
         pass
