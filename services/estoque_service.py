@@ -4,6 +4,7 @@ from algoritmos.ordenacao import ordenar_produtos_por_id
 from algoritmos.busca_binaria import buscar_produto_por_id
 from models.cliente import Cliente
 from models.produto import Produto
+from models.venda import Venda
 from estruturas.fila import Fila
 from estruturas.lde import LDE
 from estruturas.lse import LSE
@@ -127,8 +128,36 @@ class EstoqueService:
         return produto_removido
 
     def realizar_venda_exemplo(self, codigo_cliente, codigo_produto, quantidade):
-        pass
+        if self.produtos.is_empty():
+                    return None
+        cliente = self.clientes.buscar(codigo_cliente)
+        produto = self.produtos.buscar(codigo_produto)
+        quantidade = int(quantidade)
+        if not cliente or not produto:
+            return None
+        if produto.quantidade < quantidade:
+            return None
+        item = {
+            "codigo_produto": produto.codigo,
+            "quantidade": quantidade,
+            "preco_unitario": produto.preco
+        }
+        produto.atualizar_estoque(
+             produto.quantidade - quantidade
+        )
+        self.salvar_produtos()
 
+        codigo_venda = self.gerar_proximo_codigo_venda()
+        venda = Venda(codigo_venda, codigo_cliente, [item])
+
+        self.vendas.enqueue(venda)
+        print("VENDAS NA FILA:", self.vendas.listar())
+        self.salvar_vendas()
+
+
+        return venda
+
+    
     def listar_vendas(self):
         pass
 
