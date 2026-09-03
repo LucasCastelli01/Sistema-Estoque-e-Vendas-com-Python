@@ -159,16 +159,30 @@ class EstoqueService:
 
     
     def listar_vendas(self):
-        pass
+        if self.vendas.is_empty():
+            return []
+        return self.vendas.listar()
 
     def primeira_venda(self):
-        pass
+        if self.vendas.is_empty():
+                    return []
+        return self.vendas.front()
 
     def valor_total_estoque(self):
-        pass
+        total = 0
+
+        for produto in self.produtos.listar():
+            total += produto.preco * produto.quantidade
+
+        return total
 
     def valor_total_vendas(self):
-        pass
+        total = 0
+        
+        for venda in self.vendas.listar():
+            total += venda.valor_total
+
+        return total
 
     def clientes_e_valores_totais_gastos(self):
         pass

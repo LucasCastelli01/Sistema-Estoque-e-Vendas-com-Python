@@ -162,16 +162,23 @@ def executar_opcao(opcao, service):
             print("Venda não realizada. Verifique se o cliente e o produto existem e se há estoque suficiente.")
 
     elif opcao == 14:
-        pass
+        vendas = service.listar_vendas()
+        imprimir_registros(vendas, "Nenhuma venda realizada.")
 
     elif opcao == 15:
-        pass
+        venda = service.primeira_venda()
+        if venda:
+            print(f"Primeira venda da fila: Código da venda: {venda.codigo}, Código do cliente: {venda.codigo_cliente}, Itens: {venda.itens}, Valor total: R${venda.valor_total:.2f}")
+        else:
+            print("Nenhuma venda realizada.")
 
     elif opcao == 16:
-        pass
+        valor_total_estoque = service.valor_total_estoque()
+        print(f"Valor total do estoque: R${valor_total_estoque:.2f}")
 
     elif opcao == 17:
-        pass
+        valor_total_vendas = service.valor_total_vendas()
+        print(f"Valor total das vendas: R$ {valor_total_vendas:.2f}")
 
     elif opcao == 18:
         pass
