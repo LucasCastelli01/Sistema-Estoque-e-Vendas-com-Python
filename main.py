@@ -41,7 +41,7 @@ def mostrar_menu():
     print("║      Binária                                 ║")
     print("╠══════════════════════════════════════════════╣")
     print("║ VENDAS                                       ║")
-    print("║ 13 - Realizar venda simples de exemplo       ║")
+    print("║ 13 - Realizar venda simples                  ║")
     print("║ 14 - Visualizar fila de vendas               ║")
     print("║ 15 - Visualizar primeira venda da fila       ║")
     print("╠══════════════════════════════════════════════╣")
@@ -60,7 +60,7 @@ def mostrar_menu():
 
 def executar_opcao(opcao, service):
     if opcao == 1:  
-        nome = input("Digite o nome do cliente: ")
+        nome = input("Digite o nome do cliente que deseja cadastrar: ")
         cliente = service.cadastrar_cliente(nome)
         print(f"Cliente cadastrado com sucesso! Código: {cliente.codigo}, Nome: {cliente.nome}")
         
@@ -86,7 +86,7 @@ def executar_opcao(opcao, service):
             print("Cliente não encontrado ou lista de clientes vazia.")
 
     elif opcao == 5:
-        nome = input("Digite o nome do produto: ")
+        nome = input("Digite o nome do produto que deseja cadastrar: ")
         preco = ler_float("Digite o preço do produto: ")
         quantidade = ler_inteiro("Digite a quantidade em estoque do produto: ")
         produto = service.cadastrar_produto(nome, preco, quantidade)
